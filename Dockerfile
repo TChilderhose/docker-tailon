@@ -17,7 +17,9 @@ RUN apk update && \
     apk del --no-cache curl && \
     rm -rf /var/cache/apk/* && \
     rm /tmp/tailon.tar.gz
-    
+
 EXPOSE 80
+
+HEALTHCHECK CMD [ $(pgrep -x /usr/local/bin/tailon) -gt 0 ] || exit 1
 
 CMD /usr/local/bin/tailon -b 0.0.0.0:80 "/log/*"
