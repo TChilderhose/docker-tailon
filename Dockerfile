@@ -11,7 +11,8 @@ RUN apk update && \
     echo "Fetching" && \
     curl -o /tmp/tailon.tar.gz -sSL https://github.com/gvalkov/tailon/releases/download/v${VERSION}/tailon_${VERSION}_linux_amd64.tar.gz && \
     echo "Extracting and Moving" && \
-    tar xfz /tmp/tailon.tar.gz tailon -C /usr/local/bin/ && \
+    tar xfz /tmp/tailon.tar.gz tailon -C /usr/bin/ && \
+    ls /usr/bin/ && \
     echo "Cleanup" && \
     apk del --no-cache curl && \
     rm -rf /var/cache/apk/* && \
@@ -19,4 +20,4 @@ RUN apk update && \
     
 EXPOSE 80
 
-CMD echo "Test"
+CMD /usr/bin/tailon -b 0.0.0.0:80 -t 1000 -f /log
