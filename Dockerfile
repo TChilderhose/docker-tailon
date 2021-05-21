@@ -7,11 +7,12 @@ ARG VERSION=1.1.0
 RUN apk update && \
     apk add --no-cache \
     curl \
+    bash \
     tzdata && \
     echo "Fetching" && \
     curl -o /tmp/tailon.tar.gz -sSL https://github.com/gvalkov/tailon/releases/download/v${VERSION}/tailon_${VERSION}_linux_amd64.tar.gz && \
     echo "Extracting and Moving" && \
-    tar xfz /tmp/tailon.tar.gz tailon -C /usr/bin/ && \
+    tar xfz /tmp/tailon.tar.gz tailon -C /usr/local/bin/ && \
     ls /usr/bin/ && \
     echo "Cleanup" && \
     apk del --no-cache curl && \
@@ -20,4 +21,4 @@ RUN apk update && \
     
 EXPOSE 80
 
-CMD /usr/bin/tailon -b 0.0.0.0:80 -t 1000 -f /log
+CMD /usr/local/bin/tailon -b 0.0.0.0:80 -t 1000 -f /log
