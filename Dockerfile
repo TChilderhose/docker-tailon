@@ -1,4 +1,4 @@
-FROM golang
+FROM golang:alpine
 
 LABEL maintainer="tchilderhose"
 
