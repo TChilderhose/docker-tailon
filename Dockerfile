@@ -20,4 +20,4 @@ RUN apk update && \
     
 EXPOSE 80
 
-CMD /usr/local/bin/tailon -b 0.0.0.0:80 -t 1000 -f /log
+CMD /usr/local/bin/tailon -b 0.0.0.0:80 "/log/*"
