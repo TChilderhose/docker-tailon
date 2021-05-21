@@ -10,7 +10,7 @@ RUN apk update && \
     tzdata && \
     curl -sSL https://github.com/gvalkov/tailon/releases/download/v${VERSION}/tailon_${VERSION}_linux_amd64.tar.gz | tar -xvz && \    
     mv tailon /usr/local/bin/tailon && \ 
-    apk del --no-cache curl &&
+    apk del --no-cache curl && \
     rm -rf /var/cache/apk/*
     
 EXPOSE 80
