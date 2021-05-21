@@ -7,7 +7,7 @@ ARG VERSION=1.1.0
 RUN apk update && \
     apk add --no-cache \
     curl \
-    bash \
+    libc6-compat \
     tzdata && \
     echo "Fetching" && \
     curl -o /tmp/tailon.tar.gz -sSL https://github.com/gvalkov/tailon/releases/download/v${VERSION}/tailon_${VERSION}_linux_amd64.tar.gz && \
