@@ -8,11 +8,17 @@ on:
       - '*'
 
 jobs:
-  build:
+  docker:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: ghcr.io/tchilderhose/tailon
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -35,6 +41,5 @@ jobs:
           file: ./Dockerfile
           push: true
           platforms: linux/amd64
-          tags: |
-            ghcr.io/tchilderhose/tailon:${{ github.sha }}
-            ghcr.io/tchilderhose/tailon:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
