@@ -4,6 +4,7 @@ LABEL maintainer="tchilderhose"
 
 RUN apk update && \
     apk add --no-cache \
+    bash \
     curl \
     python3 py3-pip\
     tzdata && \
