@@ -12,3 +12,5 @@ RUN apk update && \
     echo "Cleanup" && \
     apk del --no-cache curl && \
     rm -rf /var/cache/apk/*
+
+CMD sleep 1d
