@@ -1,25 +1,13 @@
-FROM alpine:3.13
+FROM alpine
 
 LABEL maintainer="tchilderhose"
-
-ARG VERSION=1.1.0
 
 RUN apk update && \
     apk add --no-cache \
     curl \
-    libc6-compat \
+    python3 py3-pip\
     tzdata && \
-    echo "Fetching" && \
-    curl -o /tmp/tailon.tar.gz -sSL https://github.com/gvalkov/tailon/releases/download/v${VERSION}/tailon_${VERSION}_linux_amd64.tar.gz && \
-    echo "Extracting and Moving" && \
-    tar xfz /tmp/tailon.tar.gz -C /usr/local/bin tailon && \
+    ln -sf python3 /usr/bin/python && \
     echo "Cleanup" && \
     apk del --no-cache curl && \
-    rm -rf /var/cache/apk/* && \
-    rm /tmp/tailon.tar.gz
-
-EXPOSE 80
-
-HEALTHCHECK CMD [ $(pgrep -x /usr/local/bin/tailon) -gt 0 ] || exit 1
-
-CMD /usr/local/bin/tailon -b 0.0.0.0:80 "/log/*"
+    rm -rf /var/cache/apk/*
