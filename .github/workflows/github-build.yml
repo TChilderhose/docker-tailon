@@ -20,7 +20,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/tchilderhose/basic
+          images: ghcr.io/tchilderhose/tailon
           tags: |
             type=ref,event=tag,priority=900
             type=ref,event=branch
